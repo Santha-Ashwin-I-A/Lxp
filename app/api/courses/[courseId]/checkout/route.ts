@@ -48,6 +48,9 @@ export async function POST(
                 courseId:courseId,
              }
         })
+        if (newPurchase){
+            console.log("New purchase detected")
+        }
         const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [
             {
                 quantity:1,
