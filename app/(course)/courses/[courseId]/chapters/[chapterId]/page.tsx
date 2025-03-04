@@ -11,8 +11,13 @@ import Link from "next/link";
 import { CourseProgressButton } from "./_components/ccourse-progress-button";
 import { SGA } from "./_components/sga";
 
+type tparams= Promise<{
+    courseId: string;
+    chapterId: string;
+}>;
+
 const ChapterIdPage = async({params}:{
-    params:{courseId: string; chapterId: string}
+    params:tparams
 }) =>{
     const {courseId,chapterId} = await params;
     const user = auth();
