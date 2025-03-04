@@ -5,12 +5,20 @@ import { CourseSideBar } from "./_components/course-sidebar";
 import { auth } from "@clerk/nextjs/server";
 import { CourseNavbar } from "./_components/course-navbar";
 
+type tparams= Promise<{
+    courseId: string;
+}>;
+
+type tchild=Promise<{
+    children:React.ReactNode;
+}>
+
 const CourseLayout = async({
     children,
     params
 }:{
-    children: React.ReactNode;
-    params: {courseId: string};
+    children: tchild
+    params: tparams
 }) => {
     const user =auth();
     const userId = (await user).userId;
