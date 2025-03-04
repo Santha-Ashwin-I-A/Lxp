@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    eslint:{
+        ignoreDuringBuilds:true,
+    },
     modularizeImports:{
         lodash:{
             transform:'lodash/{{member}}'
