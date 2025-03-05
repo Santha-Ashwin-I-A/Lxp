@@ -12,7 +12,7 @@ import { Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessa
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 
 const formSchema = z.object({
     title : z.string().min(1,{
@@ -21,7 +21,6 @@ const formSchema = z.object({
 });
 
 const CreatePage = () => {
-    const {userId} = useAuth();
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema >>({
         resolver: zodResolver(formSchema),
@@ -35,7 +34,6 @@ const CreatePage = () => {
     const onSubmit = async(values: z.infer<typeof formSchema>) =>{
         try {
             const formdata = {...values,
-                "userId":userId
             }
             const response = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/courses`,formdata);
             toast.success("Course Added Successfully")
