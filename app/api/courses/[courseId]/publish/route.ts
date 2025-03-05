@@ -1,11 +1,15 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
+type tparams= Promise<{
+    courseId:string;
+}>
+
 export async function PATCH(req:Request,
     {
         params 
     }:{
-        params:{courseId:string;}
+        params:tparams
     }
 ) {
     try {

@@ -6,11 +6,16 @@ const tokenId = process.env.MUX_TOKEN_ID;
 const tokenSecret = process.env.MUX_TOKEN_Secret;
 const {video} = new Mux({tokenId,tokenSecret});
 
+type tparams= Promise<{
+    courseId:string;
+    chapterId:string;
+}>;
+
 export async function DELETE(req:Request,
     {
         params 
     }:{
-        params:{courseId:string; chapterId:string}
+        params:tparams
     }) {
     try {
         const {courseId,chapterId} = await params;
@@ -81,7 +86,7 @@ export async function PATCH(req:Request,
     {
         params 
     }:{
-        params:{chapterId:string}
+        params:tparams
     }
 ) {
     try {

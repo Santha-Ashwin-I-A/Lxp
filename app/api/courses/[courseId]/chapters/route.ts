@@ -1,15 +1,20 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
+type tparams= Promise<{
+    courseId:string;
+}>;
+
 export async function POST(
     req:Request,
-    {params}:{params:{courseId: string}}
+    {params}:{params:tparams}
 ) {
     try {
         const values = await req.json();
+        const { courseId} = await params
         const courseOwner = await db.course.findUnique({
             where:{
-                id:params.courseId,
+                id:courseId,
                 userId:values.userId,
             }
         })
@@ -19,7 +24,7 @@ export async function POST(
 
         const lastChapter = await db.chapter.findFirst({
             where:{
-                courseId: params.courseId,
+                courseId: courseId,
             },
             orderBy:{
                 position:"desc",
@@ -31,7 +36,7 @@ export async function POST(
         const chapter = await db.chapter.create({
             data:{
                 title: values.title,
-                courseId: params.courseId,
+                courseId: courseId,
                 position: newPosition,
             }
         });

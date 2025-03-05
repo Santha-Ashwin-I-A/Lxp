@@ -1,13 +1,19 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
+type tparams= Promise<{
+    courseId:string;
+    attachmentId:string;
+}>;
+
 export async function DELETE(
     req:Request,
-    {params}:{params:{ courseId: string, attachmentId: string}}) {
+    {params}:{params:tparams}) {
     try {
+        const {courseId,attachmentId} = await params;
         const course = await db.course.findUnique({
             where:{
-                id:params.courseId,
+                id:courseId,
             }
         })
         if (!course) {
@@ -15,8 +21,8 @@ export async function DELETE(
         }
         const attachment = await db.attachment.delete({
             where:{
-                id:params.attachmentId,
-                courseId:params.courseId,
+                id:attachmentId,
+                courseId:courseId,
             }
         })
         return NextResponse.json(attachment);

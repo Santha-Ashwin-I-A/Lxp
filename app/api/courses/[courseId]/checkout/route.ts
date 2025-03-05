@@ -4,12 +4,16 @@ import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
+type tparams= Promise<{
+    courseId:string;
+}>;
+
 export async function POST(
     req:Request,
     {
         params 
     }:{
-        params:{courseId:string;}
+        params:tparams
     }) {
     try {
         const { courseId } = await params;  

@@ -1,15 +1,20 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
+type tparams= Promise<{
+    courseId:string;
+}>;
+
 export async function PUT(
     req:Request,
-    {params}:{params:{courseId: string}}
+    {params}:{params:tparams}
 ) {
     try {
         const {userId,list} = await req.json();
+        const {courseId} = await params;
         const courseOwner = await db.course.findUnique({
             where:{
-                id:params.courseId,
+                id:courseId,
                 userId:userId,
             }
         })

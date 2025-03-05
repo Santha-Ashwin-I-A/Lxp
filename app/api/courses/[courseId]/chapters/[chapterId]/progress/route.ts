@@ -2,11 +2,16 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+type tparams= Promise<{
+    courseId:string;
+    chapterId:string;
+}>;
+
 export async function PUT(req:Request,
     {
         params 
     }:{
-        params:{ courseId:string; chapterId:string}
+        params:tparams
     }
 ) {
     try {

@@ -1,7 +1,11 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function PATCH(req:Request,{params}:{params :{swotId:string}}) {
+type tparams= Promise<{
+    swotId:string;
+}>;
+
+export async function PATCH(req:Request,{params}:{params :tparams}) {
     try {
         const values = await req.json();
         const {swotId} = await params;
