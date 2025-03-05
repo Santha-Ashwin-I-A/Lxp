@@ -9,15 +9,12 @@ type tparams= Promise<{
     courseId: string;
 }>;
 
-type tchild=Promise<{
-    children:React.ReactNode;
-}>
 
 const CourseLayout = async({
     children,
     params
 }:{
-    children: tchild
+    children: React.ReactNode,
     params: tparams
 }) => {
     const user =auth();
