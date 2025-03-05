@@ -19,12 +19,13 @@ export const SearchInput = () =>{
 
     useEffect(()=>{
         const url = qs.stringifyUrl({
-            url:pathname,
-            query:{
+            url: pathname,
+            query: {
                 categoryId: currentCategoryId,
                 title: debouncedValue, 
             }
         },{skipEmptyString:true,skipNull:true});
+
         router.push(url);
     },[debouncedValue, currentCategoryId, router, pathname])
 
@@ -35,7 +36,7 @@ export const SearchInput = () =>{
             />
             <Input
                 onChange={(e)=> setValue(e.target.value)}
-                value={value ||""}
+                value={value}
                 className="w-full md: pl-9 rounded-full bg-slate-100 focus-visible:ring-slate-200"
                 placeholder="Search for a course"
             />

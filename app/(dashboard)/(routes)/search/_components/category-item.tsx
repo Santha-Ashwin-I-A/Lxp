@@ -33,10 +33,10 @@ export const CategoryItem = ({
                 title: currentTitle,
                 categoryId : isSelected ? null : value,
             }
-        },{skipNull:true,skipEmptyString:true});
+        },{skipNull: true, skipEmptyString: true});
 
         router.push(url);
-    }
+    };
 
     return (
         <div>
