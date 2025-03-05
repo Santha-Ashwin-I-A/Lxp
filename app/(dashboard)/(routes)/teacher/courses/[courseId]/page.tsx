@@ -13,10 +13,14 @@ import { ChaptersForm } from "./_components/chapters-form";
 import { Banner } from "@/components/banner";
 import { Actions } from "./_components/actions";
 
+type tparams= Promise<{
+    courseId: string;
+}>;
+
 const CourseIdPage = async({
     params 
 }:{
-    params:{courseId:string}
+    params:tparams
 }) => {
     const {courseId} =await  params;
     const course = await db.course.findUnique({

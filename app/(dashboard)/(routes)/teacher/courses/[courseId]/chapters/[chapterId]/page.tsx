@@ -10,8 +10,13 @@ import { ChapterVideo } from "./_components/video-form";
 import { Banner } from "@/components/banner";
 import { ChapterActions } from "./_components/chapter-actions";
 
+type tparams= Promise<{
+    courseId: string;
+    chapterId: string;
+}>;
+
 const ChapterIdPage = async({params}:{
-    params:{courseId: string; chapterId: string}
+    params: tparams
 }) => {
 
     const {courseId,chapterId} = await params;
