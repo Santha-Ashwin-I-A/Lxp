@@ -5,6 +5,7 @@ import { getCourses } from "@/actions/get-courses";
 import { auth } from "@clerk/nextjs/server";
 import { CouresList } from "@/components/courses-list";
 import { redirect } from "next/navigation";
+import {Suspense} from "react";
 
 type SearchPageProps= Promise<{
         title: string;
@@ -47,5 +48,12 @@ const SearchPage = async({
         </>
      );
 }
+const Spage = ({props}:{props:SearchPageProps})=>{
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+          <SearchPage searchParams={props} />
+        </Suspense>
+      )
+}
  
-export default SearchPage;
+export default Spage;
