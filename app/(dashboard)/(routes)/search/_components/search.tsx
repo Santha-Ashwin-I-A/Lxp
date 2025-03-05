@@ -38,9 +38,12 @@ export const SearchPage = async({
                 <SearchInput/>
             </div>
             <div className="p-6 space-y-4">
-                <Categories
-                    items={categories}
-                />
+                <Suspense fallback={<div>Loading</div>}>
+                    <Categories
+                        items={categories}
+                    />
+                </Suspense>
+                
                 <CouresList
                     items={courses}
                 />
