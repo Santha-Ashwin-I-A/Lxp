@@ -6,16 +6,14 @@ import { auth } from "@clerk/nextjs/server";
 import { CouresList } from "@/components/courses-list";
 import { redirect } from "next/navigation";
 
-interface SearchPageProps {
-    searchParams:{
+type SearchPageProps= Promise<{
         title: string;
         categoryId: string;
-    }
-}
+}>
 
 const SearchPage = async({
     searchParams
-}:SearchPageProps) => {
+}:{searchParams:SearchPageProps}) => {
     const user = auth();
     const userId = (await user).userId;
     const categories = await db.category.findMany({
