@@ -3,7 +3,11 @@ import { db } from "@/lib/db";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-const SwotResultPage = async({params}:{params:{swotId:string}}) => {
+type tparams= Promise<{
+    swotId:string
+}>;
+
+const SwotResultPage = async({params}:{params:tparams}) => {
     const {swotId} = await params;
     const swot = await db.swot.findUnique({
         where:{

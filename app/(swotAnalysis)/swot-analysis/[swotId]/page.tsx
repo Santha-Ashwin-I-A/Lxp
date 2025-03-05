@@ -7,7 +7,11 @@ import { Opportunities } from "./_components/opportunities-form";
 import { WeaknessForm } from "./_components/weakness-form";
 import { Actions } from "./_components/action";
 
-const SwotFormPage = async({params}:{params: {swotId:string}}) => {
+type tparams= Promise<{
+    swotId:string
+}>;
+
+const SwotFormPage = async({params}:{params: tparams}) => {
     const {swotId} = await params;
     const user = auth();
     const userId = (await user).userId
