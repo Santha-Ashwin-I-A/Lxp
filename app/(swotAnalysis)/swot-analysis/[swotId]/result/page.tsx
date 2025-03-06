@@ -33,9 +33,9 @@ const SwotResultPage = async({params}:{params:tparams}) => {
                     {swot?.suggestedRole}
                 </div>
             </div>
-            <Link href={"/search"}>
+            <Link href={"/selectCourse"}>
                 <Button>
-                    Click here to choose courses
+                    Click here to choose courses correspond to suggestedRole
                     <ArrowRight className="h-4 w-4 text-sky-800"/>
                 </Button>
             </Link>
