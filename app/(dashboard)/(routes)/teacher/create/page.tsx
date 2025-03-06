@@ -7,8 +7,6 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import {toast} from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import {useAuth} from "@clerk/nextjs"
-
 import { Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,8 +18,6 @@ const formSchema = z.object({
     }),
 });
 const CreatePage = () => {
-    const user = useAuth(); 
-    const userId = user.userId;
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema >>({
         resolver: zodResolver(formSchema),
@@ -34,8 +30,7 @@ const CreatePage = () => {
 
     const onSubmit = async(values: z.infer<typeof formSchema>) =>{
         try {
-            const formdata = {...values,
-                userId
+            const formdata = {...values
             }
             const response = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/courses`,formdata);
             toast.success("Course Added Successfully")
