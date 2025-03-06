@@ -12,7 +12,6 @@ import { Form,FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessa
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs/server";
 
 const formSchema = z.object({
     title : z.string().min(1,{
