@@ -1,4 +1,5 @@
 import { db } from '@/lib/db';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 type tparams =Promise<{
@@ -13,20 +14,26 @@ const SgaForm=async({params}:{params:tparams})=> {
             topic:topic
         }
     }) 
+    if(sga == null){
+        return redirect("/");
+    }
   const [questions, setQuestions] = useState(Array(10).fill(''));
   const [answers, setAnswers] = useState(Array(10).fill(''));
   const [result, setResult] = useState({ score: '', summary: '' });
+  if(sga.ques1==null ||sga.ques2==null ||sga.ques3==null ||sga.ques4==null ||sga.ques5==null ||sga.ques6==null ||sga.ques7==null ||sga.ques8==null ||sga.ques9==null ||sga.ques10==null ){
+    return redirect("/");
+  }
   const ques =[
-    sga?.ques1,
-    sga?.ques2,
-    sga?.ques3,
-    sga?.ques4,
-    sga?.ques5,
-    sga?.ques6,
-    sga?.ques7,
-    sga?.ques8,
-    sga?.ques9,
-    sga?.ques10,
+    sga.ques1,
+    sga.ques2,
+    sga.ques3,
+    sga.ques4,
+    sga.ques5,
+    sga.ques6,
+    sga.ques7,
+    sga.ques8,
+    sga.ques9,
+    sga.ques10,
   ]
 
   const handleQuestionChange = (index: number, value: string) => {
