@@ -142,3 +142,26 @@ model Swot {
   updatedAt DateTime @updatedAt
 
 }
+
+model Sga {
+  id String @id @default(uuid())
+  userId String
+  topic String? @db.Text 
+  result Float? @db.Double
+  summary String? @db.Text
+  ques1 String? @db.Text
+  ques2 String? @db.Text
+  ques3 String? @db.Text
+  ques4 String? @db.Text
+  ques5 String? @db.Text
+  ques6 String? @db.Text
+  ques7 String? @db.Text
+  ques8 String? @db.Text
+  ques9 String? @db.Text
+  ques10 String? @db.Text
+  isFinished Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
