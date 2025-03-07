@@ -36,7 +36,7 @@ const SelectCoursePage = async({params}:{params:tparams}) => {
     return ( 
         <>
             <div>
-                Select Course page
+                Select courses here
             </div>
         </> 
      );

@@ -2,6 +2,6 @@ import { SignIn } from "@clerk/nextjs";
 
 export default function Page(){
     return <SignIn
-        fallbackRedirectUrl="/swot-analysis"
+        redirectUrl={"/swot-analysis"}
     />
 }
