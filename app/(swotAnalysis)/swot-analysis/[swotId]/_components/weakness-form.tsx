@@ -13,10 +13,11 @@ import { Form, FormControl,FormField,FormItem,FormMessage } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Swot } from "@prisma/client"
-import { useAuth } from "@clerk/nextjs";
+import {  useSession } from "@clerk/nextjs";
 
 interface WeaknessFormProps {
     swot: Swot;
+    swotId: string;
 }
 
 const formSchema = z.object({
@@ -27,10 +28,11 @@ const formSchema = z.object({
 
 export const WeaknessForm = ({
     swot,
+    swotId
 }:WeaknessFormProps) =>{
     const [isEditting,setIsEditting] = useState(false);
-    const {userId} =useAuth();
-
+    const user = useSession();
+    const userId = user.session?.id;
     const toggleEdit = () =>setIsEditting((current) =>!current);
 
     const router = useRouter();
@@ -50,7 +52,7 @@ export const WeaknessForm = ({
                 ...values,
                 "userId":userId
             }
-            await axios.patch(`${process.env.NEXT_PUBLIC_APP_URL}/api/swot/${swot.id}`,formData);
+            await axios.patch(`${process.env.NEXT_PUBLIC_APP_URL}/api/swot/${swotId}`,formData);
             toast.success("strength updated");
             toggleEdit();
             router.refresh();

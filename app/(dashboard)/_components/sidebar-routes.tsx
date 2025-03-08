@@ -13,7 +13,7 @@ const guestRoutes = [
     {
         icon: Compass,
         label: "Browse",
-        href:"/selectCourse",
+        href:`/swot-analysis`,
     },
 ]
 

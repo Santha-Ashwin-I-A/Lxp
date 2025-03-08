@@ -9,11 +9,13 @@ import { toast } from "react-toastify";
 
 interface ActionsProps {
     swot:Swot;
+    swotId:string;
     isComplete: boolean;
 }
 
 export const Actions =({
     swot,
+    swotId,
     isComplete,
 }:ActionsProps)=>{
     const router = useRouter();
@@ -36,9 +38,9 @@ export const Actions =({
                 "suggestedRole": suggestedRole,
                 "isFinished":true
             }
-            const swotUp = await axios.patch(`${process.env.NEXT_PUBLIC_APP_URL}/api/swot/${swot.id}`,swotUpdateData)
+            const swotUp = await axios.patch(`${process.env.NEXT_PUBLIC_APP_URL}/api/swot/${swotId}`,swotUpdateData)
             if(!swotUp) {return null}
-            router.push(`/swot-analysis/${swot.id}/result`)
+            router.push(`/swot-analysis/${swotId}/result`)
         }catch {
             toast.error("Something went wrong");
         } finally {

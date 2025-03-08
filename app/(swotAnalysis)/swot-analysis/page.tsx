@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useSession, useUser } from "@clerk/nextjs";
+import { db } from "@/lib/db";
+import { useSession } from "@clerk/nextjs";
 import axios from "axios";
 import { Loader } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";

@@ -14,22 +14,18 @@ export async function PATCH(req:Request,
 ) {
     try {
         const {courseId} = await params;
-        const course = await db.course.findUnique({
+        const values = await req.json();
+        const course = await db.course.update({
             where:{
-                id:courseId
-            },
-        })
-        if(!course) console.log("Cannot find course")
-        const unpublish = await db.chapter.update({
-            where:{
-                id:courseId
+                id:courseId,
+                userId:values.userId,
             },
             data:{
-                isPublished:false
+                ...values,
             }
         })
 
-        return NextResponse.json(unpublish);
+        return NextResponse.json(course);
     } catch (error) {
         console.log("[COURSE_ID_PUBLISH]",error);
         return new NextResponse("Internal error",{status:500})

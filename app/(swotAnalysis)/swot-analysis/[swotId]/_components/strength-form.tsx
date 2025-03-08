@@ -17,6 +17,7 @@ import {  useSession } from "@clerk/nextjs";
 
 interface StrengthFormProps {
     swot: Swot;
+    swotId:string;
 }
 
 const formSchema = z.object({
@@ -27,10 +28,10 @@ const formSchema = z.object({
 
 export const StrengthForm = ({
     swot,
+    swotId,
 }:StrengthFormProps) =>{
     const [isEditting,setIsEditting] = useState(false);
     const user = useSession();
-    const swotId= swot.id;
     const userId = user.session?.id;
     if(!userId){
         return redirect("/swot-analysis")

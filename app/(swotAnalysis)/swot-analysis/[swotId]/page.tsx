@@ -23,6 +23,9 @@ const SwotFormPage = async({params}:{params: tparams}) => {
             id:swotId
         }
     }) 
+    if (swot == null){
+        return redirect("/swot-analysis");
+    }
     const requiredFields = [
         swot?.strengths,
         swot?.weaknesses,
@@ -49,25 +52,30 @@ const SwotFormPage = async({params}:{params: tparams}) => {
             <div>
                 <div>
                     <StrengthForm 
-                        swot={swot?.id!}
+                        swot={swot}
+                        swotId={swotId}
                     />
                     <WeaknessForm
-                        swot={swot?.id!}
+                        swot={swot}
+                        swotId={swotId}
                     />
                 </div>
                 <div className="space-y-6">
                     <Opportunities 
-                        swot={swot?.id!}
+                        swot={swot}
+                        swotId={swotId}
                     />
                     <ThreatForm
-                        swot={swot?.id!}
+                        swot={swot}
+                        swotId={swotId}
                     />
                 </div>
             </div>
             <div>
                 <Actions
-                    swot={swot?.id!}
+                    swot={swot!}
                     isComplete={isComplete}
+                    swotId={swotId}
                 />
             </div>
         </div>
