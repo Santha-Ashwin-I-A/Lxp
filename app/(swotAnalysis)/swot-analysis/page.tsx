@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@clerk/nextjs";
+import { useSession, useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { Loader } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
@@ -11,8 +11,9 @@ import { toast } from "react-toastify";
 const SwotAnalysisPage = () => {
     const [isLoading,setIsLoading] = useState(false);
     const router = useRouter();
-    const {userId} = useAuth();
-    if(!userId){return redirect("/")}
+    const user = useSession();
+    const userId = user.session?.id;
+    if(!userId){return redirect("/sign-in")}
     const onSubmit = async() =>{
         try {
             setIsLoading(true);

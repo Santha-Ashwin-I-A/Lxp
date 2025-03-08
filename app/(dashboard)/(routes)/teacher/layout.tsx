@@ -1,5 +1,6 @@
+"use client";
 import { isTeacher } from "@/lib/teacher";
-import { useAuth } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -8,7 +9,8 @@ const TeacherLayout = ({
 }:{
     children:React.ReactNode;
 }) => {
-    const {userId} = useAuth();
+    const user = useUser();
+    const userId = user.user?.id;
     if(!isTeacher(userId)){
         return redirect("/");
     }
