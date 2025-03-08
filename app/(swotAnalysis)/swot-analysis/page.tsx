@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { useSession } from "@clerk/nextjs";
 import axios from "axios";
-import { Loader } from "lucide-react";
+import { ArrowRight, Link, Loader } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -36,6 +36,14 @@ const SwotAnalysisPage = () => {
                     <Loader className="animate-spin h-6 w-6 text-sky-700"/>
                 </div>
             )}
+            <div>
+                <Link href={`/`}>
+                    <Button>
+                        If you already completed SWOT then click here
+                        <ArrowRight className="h-4 w-4 text-sky-800"/>
+                    </Button>
+                </Link>
+            </div>
             <div>
                 SWOT Analysis Overview
             </div>

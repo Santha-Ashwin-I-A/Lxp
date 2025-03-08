@@ -53,7 +53,7 @@ export const Actions =({
             <Button
                 onClick={onClick}
                 disabled={!isComplete || isloading}
-                variant={"outline"}
+                variant={"default"}
                 size={"sm"}
             >
                 Start AI

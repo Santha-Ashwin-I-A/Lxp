@@ -6,7 +6,7 @@ import { StrengthForm } from "./_components/strength-form";
 import { ThreatForm } from "./_components/threats-form";
 import { Opportunities } from "./_components/opportunities-form";
 import { WeaknessForm } from "./_components/weakness-form";
-import { Actions } from "./_components/action";
+import { Actions} from "./_components/action";
 
 type tparams= Promise<{
     swotId:string
@@ -19,11 +19,10 @@ const SwotFormPage = async({params}:{params: tparams}) => {
     if(!userId){return redirect("/")}
     const swot = await db.swot.findUnique({
         where:{
-            userId,
-            id:swotId
+            id:swotId,
         }
-    }) 
-    if (swot == null){
+    })
+    if (!swot){
         return redirect("/swot-analysis");
     }
     const requiredFields = [
