@@ -38,7 +38,7 @@ export const Opportunities = ({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues:{
-            opportunities: swot.opportunities || ""
+            opportunities: swot?.opportunities || ""
             }
     });
 
@@ -75,9 +75,9 @@ export const Opportunities = ({
             {!isEditting &&(
                 <p className={cn(
                     "text-sm mt-2",
-                    !swot.opportunities && "text-slate-500 italic"
+                    !swot?.opportunities && "text-slate-500 italic"
                 )}>
-                    {swot.opportunities || "Yet to give strength"}
+                    {swot?.opportunities || "Yet to give strength"}
                 </p>
             )}
             {

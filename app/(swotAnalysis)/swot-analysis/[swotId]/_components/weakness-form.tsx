@@ -38,7 +38,7 @@ export const WeaknessForm = ({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues:{
-            weaknesses: swot.weaknesses || ""
+            weaknesses: swot?.weaknesses || ""
             }
     });
 
@@ -75,9 +75,9 @@ export const WeaknessForm = ({
             {!isEditting &&(
                 <p className={cn(
                     "text-sm mt-2",
-                    !swot.weaknesses && "text-slate-500 italic"
+                    !swot?.weaknesses && "text-slate-500 italic"
                 )}>
-                    {swot.weaknesses || "Yet to give strength"}
+                    {swot?.weaknesses || "Yet to give strength"}
                 </p>
             )}
             {

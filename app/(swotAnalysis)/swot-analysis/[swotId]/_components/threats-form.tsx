@@ -38,7 +38,7 @@ export const ThreatForm = ({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues:{
-            threats: swot.threats || ""
+            threats: swot?.threats || ""
             }
     });
 
@@ -75,9 +75,9 @@ export const ThreatForm = ({
             {!isEditting &&(
                 <p className={cn(
                     "text-sm mt-2",
-                    !swot.threats && "text-slate-500 italic"
+                    !swot?.threats && "text-slate-500 italic"
                 )}>
-                    {swot.threats || "Yet to give strength"}
+                    {swot?.threats || "Yet to give strength"}
                 </p>
             )}
             {

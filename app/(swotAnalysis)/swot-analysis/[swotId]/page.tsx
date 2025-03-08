@@ -49,24 +49,24 @@ const SwotFormPage = async({params}:{params: tparams}) => {
             <div>
                 <div>
                     <StrengthForm 
-                        swot={swot!}
+                        swot={swot?.id!}
                     />
                     <WeaknessForm
-                        swot={swot!}
+                        swot={swot?.id!}
                     />
                 </div>
                 <div className="space-y-6">
                     <Opportunities 
-                        swot={swot!}
+                        swot={swot?.id!}
                     />
                     <ThreatForm
-                        swot={swot!}
+                        swot={swot?.id!}
                     />
                 </div>
             </div>
             <div>
                 <Actions
-                    swot={swot!}
+                    swot={swot?.id!}
                     isComplete={isComplete}
                 />
             </div>

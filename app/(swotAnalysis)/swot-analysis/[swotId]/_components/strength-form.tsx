@@ -6,14 +6,14 @@ import { useForm } from "react-hook-form";
 import { Pencil } from "lucide-react";
 import { useState } from "react";
 import {toast} from "react-toastify";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import { Form, FormControl,FormField,FormItem,FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Swot } from "@prisma/client"
-import { useAuth } from "@clerk/nextjs";
+import {  useSession } from "@clerk/nextjs";
 
 interface StrengthFormProps {
     swot: Swot;
@@ -29,8 +29,12 @@ export const StrengthForm = ({
     swot,
 }:StrengthFormProps) =>{
     const [isEditting,setIsEditting] = useState(false);
-    const {userId} =useAuth();
-
+    const user = useSession();
+    const swotId= swot.id;
+    const userId = user.session?.id;
+    if(!userId){
+        return redirect("/swot-analysis")
+    }
     const toggleEdit = () =>setIsEditting((current) =>!current);
 
     const router = useRouter();
@@ -38,7 +42,7 @@ export const StrengthForm = ({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues:{
-            strengths: swot.strengths || ""
+            strengths: swot?.strengths || ""
             }
     });
 
@@ -50,11 +54,14 @@ export const StrengthForm = ({
                 ...values,
                 "userId":userId
             }
-            await axios.patch(`${process.env.NEXT_PUBLIC_APP_URL}/api/swot/${swot.id}`,formData);
+            
+            const res = await axios.patch(`${process.env.NEXT_PUBLIC_APP_URL}/api/swot/${swotId}`,formData);
+            console.log("finish")
             toast.success("strength updated");
             toggleEdit();
             router.refresh();
-        } catch {
+        } catch(error) {
+            console.log(error)
             toast.error("something went wrong")
         }
     }
@@ -75,9 +82,9 @@ export const StrengthForm = ({
             {!isEditting &&(
                 <p className={cn(
                     "text-sm mt-2",
-                    !swot.strengths && "text-slate-500 italic"
+                    !swot?.strengths && "text-slate-500 italic"
                 )}>
-                    {swot.strengths || "Yet to give strength"}
+                    {swot?.strengths || "Yet to give strength"}
                 </p>
             )}
             {
